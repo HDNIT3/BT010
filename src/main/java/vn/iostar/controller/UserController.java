@@ -23,12 +23,29 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
+    public String register(@Valid @ModelAttribute("user") User user, 
+                          BindingResult result, 
+                          Model model) {
+        // Kiểm tra validation errors
         if (result.hasErrors()) {
             model.addAttribute("message", "Vui lòng sửa các lỗi!");
             return "register";
         }
-        userService.save(user);
-        return "redirect:/login";
+        
+        // Kiểm tra username đã tồn tại
+        if (userService.findByUsername(user.getUsername()) != null) {
+            model.addAttribute("message", "Tên đăng nhập đã tồn tại!");
+            return "register";
+        }
+        
+        // Lưu user
+        try {
+            userService.save(user);
+            model.addAttribute("success", "Đăng ký thành công!");
+            return "redirect:/login?success";
+        } catch (Exception e) {
+            model.addAttribute("message", "Có lỗi xảy ra: " + e.getMessage());
+            return "register";
+        }
     }
 }

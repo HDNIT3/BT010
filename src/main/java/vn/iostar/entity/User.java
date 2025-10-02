@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "users") // Đổi tên bảng để tránh conflict với từ khóa SQL
 @Setter
 @Getter
 @AllArgsConstructor
@@ -32,6 +34,6 @@ public class User {
     @NotBlank(message = "Email không được để trống")
     private String email;
 
-    @NotNull(message = "Vai trò không được để trống")
-    private String role;
+    @NotBlank(message = "Vai trò không được để trống") // Đổi từ @NotNull thành @NotBlank
+    private String role = "USER"; // Set default value
 }
