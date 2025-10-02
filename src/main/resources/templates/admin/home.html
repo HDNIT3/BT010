@@ -1,0 +1,9 @@
+<h1>Trang chủ Admin</h1>
+<h2>Danh sách Category</h2>
+<ul th:each="category : ${categories}">
+    <li th:text="${category.name}"></li>
+</ul>
+<h2>Danh sách Product</h2>
+<ul th:each="product : ${products}">
+    <li th:text="${product.name} + ' - ' + ${product.price}"></li>
+</ul>
