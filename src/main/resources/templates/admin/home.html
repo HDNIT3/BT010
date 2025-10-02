@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Admin</title>
+</head>
+<body>
 <h1>Trang chủ Admin</h1>
 <h2>Danh sách Category</h2>
 <ul th:each="category : ${categories}">
@@ -7,3 +14,6 @@
 <ul th:each="product : ${products}">
     <li th:text="${product.name} + ' - ' + ${product.price}"></li>
 </ul>
+<a th:href="@{/logout}">Đăng xuất</a>
+</body>
+</html>

@@ -6,10 +6,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SecurityInterceptor())
-                .addPathPatterns("/user/**", "/admin/**")
-                .excludePathPatterns("/login", "/register", "/user/activate.htm", "/user/forgot-password.htm");
+                .addPathPatterns("/admin/**", "/user/**");
     }
 }
